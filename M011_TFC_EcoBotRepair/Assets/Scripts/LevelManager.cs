@@ -7,6 +7,7 @@ public class LevelManager : MonoBehaviour
      public static LevelManager Instance { get; private set; }
 
      public bool battery_1;
+     public bool eolicTower_1;
 
 
      private void Awake()
@@ -30,11 +31,26 @@ public class LevelManager : MonoBehaviour
 
     }
 
-    public bool Battery_1
+     public bool Battery_1
     {
         get { return battery_1; }
         private set { battery_1 = value; } 
     }
+
+    public void SetEolicTower()
+    {
+        eolicTower_1 = true;
+
+    }
+
+     public bool EolicTower_1
+    {
+        get { return eolicTower_1 ; }
+        private set { eolicTower_1 = value; } 
+    }
+
+
+   
 
 
 

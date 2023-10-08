@@ -84,6 +84,8 @@ public class AereoGenerador : MonoBehaviour
 
                 torreReparada = true;
 
+                LevelManager.Instance.SetEolicTower();
+
                 
 
             }
