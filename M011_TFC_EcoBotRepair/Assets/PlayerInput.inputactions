@@ -42,9 +42,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Interact",
+                    "name": "Arrastrar",
                     "type": "Button",
-                    "id": "e8461664-1519-4486-9462-027ba400176b",
+                    "id": "327022a7-855a-4e2b-9d4f-2641fcf9b845",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SuperSalto",
+                    "type": "Button",
+                    "id": "59beaa72-cfb3-4cf4-977c-d4414c3a04fb",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -142,12 +151,23 @@
                 },
                 {
                     "name": "",
-                    "id": "ee89ea44-a1ff-4251-8d69-e15c265c0dc5",
+                    "id": "f05c8f5c-d8a3-482f-b898-0d7a35dd6694",
                     "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Interact",
+                    "action": "Arrastrar",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fe568516-6abb-4162-ac10-70e835fb5aa6",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SuperSalto",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
