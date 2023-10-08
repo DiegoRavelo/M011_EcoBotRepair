@@ -6,9 +6,9 @@ public class BatteryPlatform : MonoBehaviour
 {
     
     private bool alredyCalled = false;
-    
 
-    
+    public int NumeroBateria; 
+
 
     
     
@@ -19,7 +19,7 @@ public class BatteryPlatform : MonoBehaviour
 
             if(!alredyCalled)
             {
-                LevelManager.Instance.SetBattery();
+                LevelManager.Instance.SetBattery(true);
                 alredyCalled = true;
 
             }
@@ -40,6 +40,7 @@ public class BatteryPlatform : MonoBehaviour
 
             
                 alredyCalled = false;
+                LevelManager.Instance.SetBattery(false);
 
             
 

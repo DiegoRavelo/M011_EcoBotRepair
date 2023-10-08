@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 478131463442963587}
   - component: {fileID: 6845899087095105766}
   - component: {fileID: 1683966018178097803}
+  - component: {fileID: 6119293732488343825}
   m_Layer: 0
-  m_Name: PlataformaEolica
+  m_Name: Eolic_Plat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -130,3 +131,19 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!114 &6119293732488343825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7857463028186259769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91816ee0d8975344aaa4baff07c022d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plataformaNumero: 0
+  TiempoEnPlataforma: 0
+  PlataformaUsada: 0
+  PersonajeEnPlataforma: 0

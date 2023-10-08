@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6845899087095105766}
   - component: {fileID: 1683966018178097803}
   m_Layer: 0
-  m_Name: PlataformaCarga_Lv_2
+  m_Name: ChargeBat_Plat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

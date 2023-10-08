@@ -324,6 +324,8 @@ public class M011_PlayerController : MonoBehaviour
 
     public GameObject cubo;
 
+    
+
 
     public void ArrastrarObj(InputAction.CallbackContext context)
     {
@@ -336,7 +338,7 @@ public class M011_PlayerController : MonoBehaviour
             {
                 // Mueve el cubo justo delante del personaje y lo convierte en un hijo del personaje.
                 cubo.transform.position = transform.position + transform.forward * -1.0f;
-                cubo.transform.SetParent(transform);
+                 cubo.transform.SetParent(transform);
 
 
                 cubo.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
@@ -347,7 +349,7 @@ public class M011_PlayerController : MonoBehaviour
                 // Desvincula el cubo del personaje.
 
                 cubo.transform.SetParent(null);
-                cubo.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+               cubo.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
                 adherido = false;
             }
 
@@ -361,10 +363,22 @@ public class M011_PlayerController : MonoBehaviour
     {
         if (other.CompareTag("Battery"))
         {
+            cubo = other.gameObject;
             adherible = true;
         }
 
     }
+
+     private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Battery"))
+        {
+            cubo = null;
+            adherible = false;
+        }
+
+    }
+
 
 
 

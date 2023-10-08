@@ -4,34 +4,38 @@ using UnityEngine;
 
 public class ChargePlatformEolic : MonoBehaviour
 {
+    public int plataformaNumero;
+
+    public int nivelMaximoCarga;
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(PersonajeEnPlataforma == true && PlataformaUsada == false)
+        if (PersonajeEnPlataforma == true && PlataformaUsada == false && LevelManager.Instance.GetTower(plataformaNumero - 1) == true)
         {
             TiempoEnPlataforma += Time.deltaTime;
+
+            if (TiempoEnPlataforma >= 1f && PlataformaUsada == false && GameManager.Instance.NivelDeCarga <= (nivelMaximoCarga - 1))
+            {
+                GameManager.Instance.AumentarNivelDeCarga();
+
+                GameManager.Instance.EstablecerCooldown();
+
+                PlataformaUsada = true;
+
+                TiempoEnPlataforma = 0f;
+
+
+            }
         }
 
-          if (TiempoEnPlataforma >= 1f && PlataformaUsada == false && GameManager.Instance.NivelDeCarga <= 2 && LevelManager.Instance.Battery_1 == true)
-        {
-            GameManager.Instance.AumentarNivelDeCarga();
 
-            GameManager.Instance.EstablecerCooldown();
 
-            
-            PlataformaUsada = true;
 
-            TiempoEnPlataforma = 0f;
-
-            
-        }
-
-        
     }
 
 
@@ -40,20 +44,20 @@ public class ChargePlatformEolic : MonoBehaviour
     public bool PlataformaUsada = false;
 
     public bool PersonajeEnPlataforma = false;
-     private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player") && PlataformaUsada == false)
         {
-            
+
             PersonajeEnPlataforma = true;
 
         }
 
-        
+
 
     }
 
-       private void OnTriggerExit(Collider other)
+    private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
         {

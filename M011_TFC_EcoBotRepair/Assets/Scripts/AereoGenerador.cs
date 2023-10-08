@@ -15,6 +15,8 @@ public class AereoGenerador : MonoBehaviour
     public bool reparando;
     public float tiempoReparando;
 
+    public int TorreNumero;
+
     void Start()
     {
 
@@ -82,9 +84,17 @@ public class AereoGenerador : MonoBehaviour
 
                 tiempoReparando = 0f;
 
+                
+                LevelManager.Instance.SetTower(TorreNumero);
+
+                GameManager.Instance.SumarPuntosMetal(-MetalReparar);
+
+                GameManager.Instance.SumarPuntosTuerca(-TuercaReparar);
+
+                GameManager.Instance.SumarPuntosMuelle(-MuelleReparar);
+
                 torreReparada = true;
 
-                LevelManager.Instance.SetEolicTower();
 
                 
 
