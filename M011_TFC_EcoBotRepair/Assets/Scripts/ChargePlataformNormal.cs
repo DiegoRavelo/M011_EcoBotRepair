@@ -2,41 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChargePlatformEolic : MonoBehaviour
+public class ChargePlataformNormal : MonoBehaviour
 {
-    public int plataformaNumero;
-
-    public int nivelMaximoCarga;
+    // Start is called before the first frame update
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (PersonajeEnPlataforma == true && PlataformaUsada == false && LevelManager.Instance.GetTower(plataformaNumero - 1) == true)
+        if(PersonajeEnPlataforma == true && PlataformaUsada == false)
         {
             TiempoEnPlataforma += Time.deltaTime;
-
-            if (TiempoEnPlataforma >= 1f && PlataformaUsada == false && GameManager.Instance.NivelDeCarga < nivelMaximoCarga )
-            {
-                GameManager.Instance.AumentarNivelDeCarga();
-
-                GameManager.Instance.EstablecerCooldown();
-
-                
-
-                TiempoEnPlataforma = 0f;
-
-
-            }
         }
 
+          if (TiempoEnPlataforma >= 1f && PlataformaUsada == false && GameManager.Instance.NivelDeCarga < NivelDeCargaMaximo )
+        {
+            GameManager.Instance.AumentarNivelDeCarga();
+
+            GameManager.Instance.EstablecerCooldown();
 
 
+            TiempoEnPlataforma = 0f;
 
+            
+        }
+
+        
     }
+
+    public int NivelDeCargaMaximo;
 
 
     public float TiempoEnPlataforma = 0f;
@@ -44,20 +41,20 @@ public class ChargePlatformEolic : MonoBehaviour
     public bool PlataformaUsada = false;
 
     public bool PersonajeEnPlataforma = false;
-    private void OnTriggerEnter(Collider other)
+     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player") && PlataformaUsada == false)
         {
-
+            
             PersonajeEnPlataforma = true;
 
         }
 
-
+        
 
     }
 
-    private void OnTriggerExit(Collider other)
+       private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
         {

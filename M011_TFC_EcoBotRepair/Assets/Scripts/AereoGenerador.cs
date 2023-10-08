@@ -92,6 +92,7 @@ public class AereoGenerador : MonoBehaviour
                 GameManager.Instance.SumarPuntosTuerca(-TuercaReparar);
 
                 GameManager.Instance.SumarPuntosMuelle(-MuelleReparar);
+                
 
                 torreReparada = true;
 

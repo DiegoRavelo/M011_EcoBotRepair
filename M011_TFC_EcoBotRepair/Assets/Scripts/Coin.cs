@@ -13,12 +13,9 @@ public class Coin : MonoBehaviour
     private bool alreadyCalled = false;
 
     
-
-    
-
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Player") && GameManager.Instance.Pickable == true)
+        if (other.CompareTag("Player") && GameManager.Instance.Pickable == true && alreadyCalled == false)
         {
             
             GameManager.Instance.SumarPuntosMetal(valor);

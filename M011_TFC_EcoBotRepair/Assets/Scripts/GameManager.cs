@@ -76,6 +76,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("Tienes " + muelleTotal + " de muelle" );
     }
 
+    
     public void EstablecerCooldown()
     {
 

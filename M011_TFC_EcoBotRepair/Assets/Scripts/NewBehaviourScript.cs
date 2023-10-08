@@ -283,31 +283,46 @@ public class M011_PlayerController : MonoBehaviour
 
     public void Sprint(InputAction.CallbackContext context)
     {
-
-        if (GameManager.Instance.RemainingSprintTime > 0f && GameManager.Instance.NivelDeCarga >= 3)
+        if(context.started)
         {
-            if (context.started || context.performed)
+            if (!isSprinting &&GameManager.Instance.RemainingSprintTime > 0f && GameManager.Instance.NivelDeCarga >= 3)
             {
-
                 isSprinting = true;
                 movement.isSprinting = true;
+
+            }
+            else if (isSprinting)//context.performed)
+            {
+
+                isSprinting = false;
+                movement.isSprinting = false;
 
                 //Debug.Log(GameManager.Instance.TotalSprintTime);
 
             }
+            // if(context.canceled)  //isSprinting == true)
+            // {
+            //     isSprinting = false;
+            //     movement.isSprinting = false;
+
+            // }
 
 
 
 
+
+            
 
         }
 
-        if (context.canceled)
-        {
-            isSprinting = false;
-            movement.isSprinting = false;
+        
 
-        }
+        // if (context.canceled)
+        // {
+        //     isSprinting = false;
+        //     movement.isSprinting = false;
+
+        // }
 
 
 
