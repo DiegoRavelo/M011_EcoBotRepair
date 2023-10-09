@@ -23,11 +23,17 @@ public class ChargePlatformEolic : MonoBehaviour
             {
                 GameManager.Instance.AumentarNivelDeCarga();
 
-                GameManager.Instance.EstablecerCooldown();
+                
 
                 
 
                 TiempoEnPlataforma = 0f;
+
+                if( nivelMaximoCarga >= 3)
+            {
+                GameManager.Instance.EstablecerCooldown();
+            }
+
 
 
             }

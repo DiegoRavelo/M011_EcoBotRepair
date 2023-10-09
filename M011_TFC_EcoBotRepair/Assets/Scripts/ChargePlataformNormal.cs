@@ -22,10 +22,15 @@ public class ChargePlataformNormal : MonoBehaviour
         {
             GameManager.Instance.AumentarNivelDeCarga();
 
-            GameManager.Instance.EstablecerCooldown();
+            
 
 
             TiempoEnPlataforma = 0f;
+
+            if( NivelDeCargaMaximo >= 3)
+            {
+                GameManager.Instance.EstablecerCooldown();
+            }
 
             
         }

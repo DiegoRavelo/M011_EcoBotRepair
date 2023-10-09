@@ -4,51 +4,38 @@ using UnityEngine;
 
 public class BatteryPlatform : MonoBehaviour
 {
-    
+
     private bool alredyCalled = false;
-
-    public int NumeroBateria; 
-
-
-    
-    
-    private void OnTriggerStay(Collider other)
+    public int NumeroBateria;
+    private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Battery"))
         {
 
-            if(!alredyCalled)
+            if (!alredyCalled)
             {
-                LevelManager.Instance.SetBattery(true);
+                //LevelManager.Instance.SetBattery(true);
+                LevelManager.Instance.SetBattery(NumeroBateria);
+                Debug.Log("gola");
                 alredyCalled = true;
 
             }
 
-            
-            
-            
-            
-            //AudioManager.Instance.ReproducirSonido(coinSFX);
         }
 
     }
 
-     private void OnTriggerExit(Collider other)
+    private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Battery"))
+        if (other.CompareTag("Battery") && alredyCalled == true)
         {
 
-            
-                alredyCalled = false;
-                LevelManager.Instance.SetBattery(false);
+
+            alredyCalled = false;
+            LevelManager.Instance.SetBattery(NumeroBateria);
+            Debug.Log(NumeroBateria + "fuera");
 
             
-
-            
-            
-            
-            
-            //AudioManager.Instance.ReproducirSonido(coinSFX);
         }
 
     }

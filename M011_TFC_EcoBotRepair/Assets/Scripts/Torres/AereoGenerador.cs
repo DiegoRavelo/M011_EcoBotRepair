@@ -34,9 +34,10 @@ public class AereoGenerador : MonoBehaviour
         GameManager.Instance.TuercaTotal >= TuercaReparar && GameManager.Instance.NivelDeCarga >= 2)
         {
             reparando = true;
+            
 
         }
-        if (other.CompareTag("Player") && GameManager.Instance.Pickable == true )
+        if (other.CompareTag("Player") && GameManager.Instance.Pickable == true && torreReparada == false)
         {
             if (GameManager.Instance.MetalTotal < MetalReparar ||
         GameManager.Instance.MuelleTotal < MuelleReparar ||
@@ -45,7 +46,7 @@ public class AereoGenerador : MonoBehaviour
                 Debug.Log("te faltan materiales");
 
         }
-        if (other.CompareTag("Player") && GameManager.Instance.NivelDeCarga <= 1 && GameManager.Instance.Pickable == true)
+        if (other.CompareTag("Player") && GameManager.Instance.NivelDeCarga <= 1 && GameManager.Instance.Pickable == true && torreReparada == false)
         {
 
 
@@ -70,6 +71,11 @@ public class AereoGenerador : MonoBehaviour
     public bool torreReparada = false;
     void Update()
     {
+        if(LevelManager.Instance.GetTower(TorreNumero - 1) == true)
+        {
+            animator.SetBool("Reparado", true);
+
+        }
 
         if (reparando)
         {
@@ -78,11 +84,13 @@ public class AereoGenerador : MonoBehaviour
             if (tiempoReparando >= 4f && torreReparada == false)
             {
 
-                animator.SetBool("Reparado", true);
+                
 
                 GameManager.Instance.DisminuirNivelDeCarga();
 
                 tiempoReparando = 0f;
+
+                
 
                 
                 LevelManager.Instance.SetTower(TorreNumero);
@@ -92,6 +100,8 @@ public class AereoGenerador : MonoBehaviour
                 GameManager.Instance.SumarPuntosTuerca(-TuercaReparar);
 
                 GameManager.Instance.SumarPuntosMuelle(-MuelleReparar);
+
+                Debug.Log("Torre " + TorreNumero + " reparada");
                 
 
                 torreReparada = true;
@@ -100,6 +110,8 @@ public class AereoGenerador : MonoBehaviour
                 
 
             }
+
+           
 
 
         }

@@ -118,23 +118,51 @@ public class M011_PlayerController : MonoBehaviour
         if (GameManager.Instance.RemainingSprintTime == 0f && isSprinting == true)
         {
 
-
-
-            GameManager.Instance.DisminuirNivelDeCarga();
-
             isSprinting = false;
 
             movement.isSprinting = false;
 
+        }
+        if(superSalto == true)
+        {
+                _velocity += jumpPower * Time.deltaTime * 2.3f;
+                Debug.Log("aaaa");
+
+                 movement.speed = 17;
 
 
         }
+       
 
 
 
+    }
+    public bool MaxSprintTimer;
 
+    public float timer;
 
+     public void Sprint(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            if (!isSprinting && GameManager.Instance.RemainingSprintTime > 0f)
+            {
+                GameManager.Instance.DisminuirNivelDeCarga();
+                isSprinting = true;
+                
+                movement.isSprinting = true;
+                
 
+            }
+            else if (isSprinting)
+            {
+
+                isSprinting = false;
+                movement.isSprinting = false;
+
+            }
+
+        }
 
     }
 
@@ -219,8 +247,8 @@ public class M011_PlayerController : MonoBehaviour
         {
 
 
-            GameManager.Instance.DisminuirNivelDeCarga();
-            
+            GameManager.Instance.DisminuirNivelDeCargaPorSalto();
+
 
             Salto = false;
 
@@ -238,16 +266,26 @@ public class M011_PlayerController : MonoBehaviour
 
     public bool superSalto;
 
+    public float glidePower = 1000f;
+
+
+
+
+    
+
     public void SuperSalto(InputAction.CallbackContext context)
     {
         if (GameManager.Instance.NivelDeCarga == 4)
         {
-            if (!context.started) return;
-            if (!IsGrounded()) return;
+            if (context.performed)
+            {
 
-
-            GameManager.Instance.DisminuirNivelDeCarga();
+                superSalto = true;
             
+            }
+            //if (!IsGrounded()) return;
+
+           
 
 
 
@@ -281,65 +319,22 @@ public class M011_PlayerController : MonoBehaviour
 
 
 
-    public void Sprint(InputAction.CallbackContext context)
-    {
-        if(context.started)
-        {
-            if (!isSprinting &&GameManager.Instance.RemainingSprintTime > 0f && GameManager.Instance.NivelDeCarga >= 3)
-            {
-                isSprinting = true;
-                movement.isSprinting = true;
-
-            }
-            else if (isSprinting)//context.performed)
-            {
-
-                isSprinting = false;
-                movement.isSprinting = false;
-
-                //Debug.Log(GameManager.Instance.TotalSprintTime);
-
-            }
-            // if(context.canceled)  //isSprinting == true)
-            // {
-            //     isSprinting = false;
-            //     movement.isSprinting = false;
-
-            // }
-
-
-
-
-
-            
-
-        }
-
-        
-
-        // if (context.canceled)
-        // {
-        //     isSprinting = false;
-        //     movement.isSprinting = false;
-
-        // }
-
-
-
-
-
-    }
-
-
-
-
-
-
+   
     private bool adherido = false;
+
+    private bool adherible;
 
     public GameObject cubo;
 
-    
+     private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Battery"))
+        {
+            cubo = other.gameObject;
+            adherible = true;
+        }
+
+    }
 
 
     public void ArrastrarObj(InputAction.CallbackContext context)
@@ -353,7 +348,7 @@ public class M011_PlayerController : MonoBehaviour
             {
                 // Mueve el cubo justo delante del personaje y lo convierte en un hijo del personaje.
                 cubo.transform.position = transform.position + transform.forward * -1.0f;
-                 cubo.transform.SetParent(transform);
+                cubo.transform.SetParent(transform);
 
 
                 cubo.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
@@ -364,7 +359,7 @@ public class M011_PlayerController : MonoBehaviour
                 // Desvincula el cubo del personaje.
 
                 cubo.transform.SetParent(null);
-               cubo.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+                cubo.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
                 adherido = false;
             }
 
@@ -372,19 +367,11 @@ public class M011_PlayerController : MonoBehaviour
 
     }
 
-    private bool adherible;
+   
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Battery"))
-        {
-            cubo = other.gameObject;
-            adherible = true;
-        }
+   
 
-    }
-
-     private void OnTriggerExit(Collider other)
+    private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Battery"))
         {

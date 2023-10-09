@@ -13,18 +13,12 @@ public class GameManager : MonoBehaviour
 
     public bool pickable;
 
-
-
     public float totalSprintTime;
-    private float remainingSprintTime;
-
-   
+    public float remainingSprintTime;
 
     private int muelleTotal;
 
      
-    
-    
     private void Awake()
     {
         if (Instance == null)
@@ -87,6 +81,13 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void ReducirCooldown()
+    {
+        remainingSprintTime = 0f;
+
+    }
+
+
     public void DisminuirCooldown()
     {
 
@@ -145,7 +146,7 @@ public class GameManager : MonoBehaviour
 
    
 
-     private int nivelDeCarga = 1;
+     public int nivelDeCarga = 4;
 
     public void AumentarNivelDeCarga()
     {
@@ -160,6 +161,29 @@ public class GameManager : MonoBehaviour
         }
     }
 
+     public void DisminuirNivelDeCargaPorSalto()
+    {
+        if (nivelDeCarga == 2)
+        {
+            nivelDeCarga--;
+            Debug.Log("Nivel de carga disminuido a " + nivelDeCarga);
+        }
+        if (nivelDeCarga == 3)
+        {
+            nivelDeCarga--;
+            ReducirCooldown();
+            Debug.Log("Nivel de carga disminuido a " + nivelDeCarga);
+        }
+        if (nivelDeCarga == 4)
+        {
+            nivelDeCarga--;
+            Debug.Log("Nivel de carga disminuido a " + nivelDeCarga);
+            EstablecerCooldown();
+        } 
+        
+        
+    }
+
     public void DisminuirNivelDeCarga()
     {
         if (nivelDeCarga == 2)
@@ -170,6 +194,7 @@ public class GameManager : MonoBehaviour
         if (nivelDeCarga == 3)
         {
             nivelDeCarga--;
+            //ReducirCooldown();
             Debug.Log("Nivel de carga disminuido a " + nivelDeCarga);
         }
         if (nivelDeCarga == 4)

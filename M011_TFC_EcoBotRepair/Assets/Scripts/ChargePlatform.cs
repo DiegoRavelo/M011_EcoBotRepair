@@ -10,6 +10,10 @@ public class ChargePlatform : MonoBehaviour
         
     }
 
+    public int NivelDeCargaMaximo;
+
+    public int numeroPlatBateria;
+
     // Update is called once per frame
     void Update()
     {
@@ -18,16 +22,21 @@ public class ChargePlatform : MonoBehaviour
             TiempoEnPlataforma += Time.deltaTime;
         }
 
-          if (TiempoEnPlataforma >= 1f && PlataformaUsada == false && GameManager.Instance.NivelDeCarga <= 1 && LevelManager.Instance.Battery_1 == true)
+          if (TiempoEnPlataforma >= 1f && PlataformaUsada == false && GameManager.Instance.NivelDeCarga < NivelDeCargaMaximo && LevelManager.Instance.GetBattery(numeroPlatBateria - 1) == true)
         {
             GameManager.Instance.AumentarNivelDeCarga();
 
-            GameManager.Instance.EstablecerCooldown();
-
+            
             
             PlataformaUsada = true;
 
             TiempoEnPlataforma = 0f;
+
+             if( NivelDeCargaMaximo >= 3)
+            {
+                GameManager.Instance.EstablecerCooldown();
+            }
+
 
             
         }
