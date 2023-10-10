@@ -6,7 +6,6 @@ using UnityEngine.InputSystem;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
-    public int PuntosTotales {get; private set;}
     private int metalTotal;
 
     private int tuercaTotal;
@@ -18,7 +17,7 @@ public class GameManager : MonoBehaviour
 
     private int muelleTotal;
 
-     
+
     private void Awake()
     {
         if (Instance == null)
@@ -30,8 +29,6 @@ public class GameManager : MonoBehaviour
             Debug.Log("Cuidado! Mas de un GameManager en escena.");
         }
 
-        
-
         Debug.Log(nivelDeCarga);
 
 
@@ -41,7 +38,7 @@ public class GameManager : MonoBehaviour
 
     public void Pick(InputAction.CallbackContext context)
     {
-        if(context.started || context.performed)
+        if (context.started || context.performed)
         {
             pickable = true;
         }
@@ -55,26 +52,26 @@ public class GameManager : MonoBehaviour
     public void SumarPuntosMetal(int puntosASumar)
     {
         metalTotal += puntosASumar;
-        Debug.Log("Tienes " + metalTotal + " de metal" );
+        Debug.Log("Tienes " + metalTotal + " de metal");
     }
 
     public void SumarPuntosTuerca(int puntosASumar)
     {
         tuercaTotal += puntosASumar;
-        Debug.Log("Tienes " + tuercaTotal + " de tuerca" );
+        Debug.Log("Tienes " + tuercaTotal + " de tuerca");
     }
 
     public void SumarPuntosMuelle(int puntosASumar)
     {
         muelleTotal += puntosASumar;
-        Debug.Log("Tienes " + muelleTotal + " de muelle" );
+        Debug.Log("Tienes " + muelleTotal + " de muelle");
     }
 
-    
+
     public void EstablecerCooldown()
     {
 
-    
+
         remainingSprintTime = 5f;
 
         totalSprintTime = 5f;
@@ -94,19 +91,17 @@ public class GameManager : MonoBehaviour
         remainingSprintTime -= Time.deltaTime;
 
         if (remainingSprintTime < 0f)
-         {
-         remainingSprintTime = 0f;
-         }
-        
+        {
+            remainingSprintTime = 0f;
+        }
+
 
     }
 
-    // Inicialmente el nivel de carga es 1.
-
     public bool Pickable
     {
-       get { return pickable; }
-        private set { pickable = value; }   
+        get { return pickable; }
+        private set { pickable = value; }
     }
 
     public float RemainingSprintTime
@@ -132,21 +127,20 @@ public class GameManager : MonoBehaviour
         private set { metalTotal = value; }
     }
 
-     public int TuercaTotal
-     {
+    public int TuercaTotal
+    {
         get { return tuercaTotal; }
         private set { tuercaTotal = value; }
     }
 
-     public int MuelleTotal
-     {
+    public int MuelleTotal
+    {
         get { return muelleTotal; }
         private set { muelleTotal = value; }
     }
 
-   
-
-     public int nivelDeCarga = 4;
+     // Inicialmente el nivel de carga es 1.
+    public int nivelDeCarga = 1;
 
     public void AumentarNivelDeCarga()
     {
@@ -161,12 +155,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
-     public void DisminuirNivelDeCargaPorSalto()
+    public void DisminuirNivelDeCargaPorSalto()
     {
         if (nivelDeCarga == 2)
         {
             nivelDeCarga--;
             Debug.Log("Nivel de carga disminuido a " + nivelDeCarga);
+            ReducirCooldown();
         }
         if (nivelDeCarga == 3)
         {
@@ -178,10 +173,10 @@ public class GameManager : MonoBehaviour
         {
             nivelDeCarga--;
             Debug.Log("Nivel de carga disminuido a " + nivelDeCarga);
-            EstablecerCooldown();
-        } 
-        
-        
+            
+        }
+
+
     }
 
     public void DisminuirNivelDeCarga()
@@ -201,20 +196,11 @@ public class GameManager : MonoBehaviour
         {
             nivelDeCarga--;
             Debug.Log("Nivel de carga disminuido a " + nivelDeCarga);
-            EstablecerCooldown();
-        } 
-        
-        
+            
+        }
+
+
     }
 
-    
 
-
-    // public bool Epressed ()
-    
-    
-
-    
-
-    
 }

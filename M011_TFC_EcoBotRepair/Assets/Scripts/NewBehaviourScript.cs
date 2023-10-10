@@ -147,10 +147,17 @@ public class M011_PlayerController : MonoBehaviour
         {
             if (!isSprinting && GameManager.Instance.RemainingSprintTime > 0f)
             {
-                GameManager.Instance.DisminuirNivelDeCarga();
-                isSprinting = true;
                 
                 movement.isSprinting = true;
+                isSprinting = true;
+
+                if(GameManager.Instance.RemainingSprintTime == 5f)
+                {
+                    GameManager.Instance.DisminuirNivelDeCarga();
+
+                }
+                
+                
                 
 
             }
