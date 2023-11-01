@@ -16,7 +16,7 @@ public class BatteryPlatform : MonoBehaviour
             {
                 //LevelManager.Instance.SetBattery(true);
                 LevelManager.Instance.SetBattery(NumeroBateria);
-                Debug.Log("gola");
+                Debug.Log("Battery placed");
                 alredyCalled = true;
 
             }

@@ -5,14 +5,17 @@ TagManager:
   serializedVersion: 2
   tags:
   - Battery
+  - Ground
+  - Stencil
+  - Siluete
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
-  - 
+  - Stencil
   - 
   - 
   - 
