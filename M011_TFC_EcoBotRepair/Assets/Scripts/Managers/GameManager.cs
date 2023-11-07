@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
             Debug.Log("Cuidado! Mas de un GameManager en escena.");
         }
 
-        Debug.Log(nivelDeCarga);
+        //Debug.Log(nivelDeCarga);
 
 
     }
@@ -90,7 +90,7 @@ public class GameManager : MonoBehaviour
     public void DisminuirCooldown()
     {
 
-        //remainingSprintTime -= Time.deltaTime;
+        remainingSprintTime -= Time.deltaTime;
 
         if (remainingSprintTime < 0f)
         {

@@ -22,32 +22,55 @@ public class SliderEnergy : MonoBehaviour
     
     void Start()
     {
-         targetValue = GameManager.Instance.NivelDeCarga + 1;
+         //targetValue = GameManager.Instance.NivelDeCarga + 1;
         
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        if(GameManager.Instance.NivelDeCarga == 1)
+        {
+            slider.value = 1f;
+
+        }
+
+         if(GameManager.Instance.NivelDeCarga == 2)
+        {
+            slider.value = 2.24f;
+
+        }
+         if(GameManager.Instance.NivelDeCarga == 3)
+        {
+            slider.value = 3.47f;
+
+        }
+         if(GameManager.Instance.NivelDeCarga == 4)
+        {
+            slider.value = 5;
+
+        }
+
+
         tuercas.text = GameManager.Instance.TuercaTotal.ToString();
 
         muelle.text = GameManager.Instance.MuelleTotal.ToString();
 
         engranje.text = GameManager.Instance.MetalTotal.ToString();
 
-        float sliderValue = slider.value;
 
-        // Actualiza el valor objetivo si ha cambiado
-        int newValue = GameManager.Instance.NivelDeCarga + 1;
-        if (newValue != targetValue)
-        {
-            targetValue = newValue;
-        }
+        // // Actualiza el valor objetivo si ha cambiado
+        // int newValue = GameManager.Instance.NivelDeCarga + 1;
+        // if (newValue != targetValue)
+        // {
+        //     targetValue = newValue;
+        // }
 
-        // Interpola suavemente hacia el valor objetivo
-        sliderValue = Mathf.Lerp(sliderValue, targetValue, lerpSpeed * Time.deltaTime);
+        // // Interpola suavemente hacia el valor objetivo
+        // sliderValue = Mathf.Lerp(sliderValue, targetValue, lerpSpeed * Time.deltaTime);
 
-        // Asigna el valor interpolado al Slider
-        slider.value = sliderValue;
+        // // Asigna el valor interpolado al Slider
+        // slider.value = sliderValue;
     }
 }

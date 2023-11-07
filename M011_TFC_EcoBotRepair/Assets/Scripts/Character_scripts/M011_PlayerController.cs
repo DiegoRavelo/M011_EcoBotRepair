@@ -9,7 +9,7 @@ public class M011_PlayerController : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    public delegate void AnimationChangeHandler(string animationName);
+    public delegate void AnimationChangeHandler(int animator, string animationName);
     public static event AnimationChangeHandler OnAnimationChange;
 
     private static Vector2 _input;
@@ -38,6 +38,8 @@ public class M011_PlayerController : MonoBehaviour
 
     private float _currentVelocity;
 
+    public Animator animator;
+
 
 
     private void Awake()
@@ -50,9 +52,9 @@ public class M011_PlayerController : MonoBehaviour
     public void Move(InputAction.CallbackContext context)
     {
 
-      
-        
-            _input = context.ReadValue<Vector2>();
+
+
+        _input = context.ReadValue<Vector2>();
 
 
         _directionMala = new Vector3(_input.x, y: 0.0f, z: _input.y);
@@ -61,12 +63,12 @@ public class M011_PlayerController : MonoBehaviour
 
         _direction = matrix.MultiplyPoint3x4(_directionMala);
 
-        
-        
 
 
 
-        
+
+
+
 
 
     }
@@ -137,7 +139,13 @@ public class M011_PlayerController : MonoBehaviour
 
             cantidadSaltos += 1;
 
-            Salto = true;
+            //animator.Play("Jump1");
+
+            isJumping = true;
+
+          
+
+            //Salto = true;
 
             //CheckJump();
 
@@ -150,7 +158,7 @@ public class M011_PlayerController : MonoBehaviour
 
     public void CheckJump()
     {
-        if (cantidadSaltos == 3 && Salto == true && GameManager.Instance.NivelDeCarga >= 2)
+        if (cantidadSaltos == 3 && isJumping == true && GameManager.Instance.NivelDeCarga >= 2)
         {
             GameManager.Instance.DisminuirNivelDeCargaPorSalto();
 
@@ -185,48 +193,29 @@ public class M011_PlayerController : MonoBehaviour
         if (_direction == Vector3.zero)
         {
 
-            OnAnimationChange?.Invoke("Cadenas_Stop");
+            OnAnimationChange?.Invoke(0, "Cadenas_Stop");
 
         }
-        if (_direction != Vector3.zero)
+        if(movement.currentSpeed == 10)
         {
-            if (movement.isSprinting)
-            {
+            OnAnimationChange?.Invoke(0, "Cadenas_Idle");
 
-                OnAnimationChange?.Invoke("Sprint");
-
-
-            }
-            if (!movement.isSprinting)
-            {
-                if(!IsGrounded())
-                {
-                     OnAnimationChange?.Invoke("Cadenas_Jump");
-
-                }
-                if(IsGrounded())
-                {
-                    OnAnimationChange?.Invoke("Cadenas_Idle");
-
-                }
-                
-
-            }
-          
         }
+        if(movement.currentSpeed == 17)
+        {
+            OnAnimationChange?.Invoke(0, "Sprint");
 
+        }
+        if(isJumping == true)
+        {
+            OnAnimationChange?.Invoke(2 , "Jump");
+        }
+        if(IsReparing == true)
+        {
+            OnAnimationChange?.Invoke(2 , "Fix");
+        }
+        
        
-       
-        if(IsGrounded())
-        {
-            Salto = false;
-
-        }
-        if(!IsGrounded() && Salto == true)
-        {
-            Salto = true;
-
-        }
 
 
     }
@@ -241,7 +230,16 @@ public class M011_PlayerController : MonoBehaviour
 
         ApplyMovement();
 
-        //AlinToSurface();
+        //print(isJumping);
+
+        if (IsGrounded())
+        {
+            isJumping = false;
+        }
+
+        
+
+        
 
 
         if (movement.isSprinting == true)
@@ -298,19 +296,36 @@ public class M011_PlayerController : MonoBehaviour
 
     }
 
+    private bool IsReparing;
+
+
+
+     public void Pick(InputAction.CallbackContext context)
+    {
+        if (context.started || context.performed)
+        {
+            IsReparing = true;
+        }
+        else
+        {
+            IsReparing = false;
+
+        }
+    }
+
 
     private void ApplyRotation()
     {
 
-        if(IsGrounded())
+        if (IsGrounded())
         {
-                    if (_input.sqrMagnitude == 0) return;
+            if (_input.sqrMagnitude == 0) return;
 
-        var targetAngle = Mathf.Atan2(_direction.x, _direction.z) * Mathf.Rad2Deg;
+            var targetAngle = Mathf.Atan2(_direction.x, _direction.z) * Mathf.Rad2Deg;
 
-        var angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref _currentVelocity, smoothTime);
+            var angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref _currentVelocity, smoothTime);
 
-        transform.rotation = Quaternion.Euler(transform.eulerAngles.x, angle, transform.eulerAngles.z);
+            transform.rotation = Quaternion.Euler(transform.eulerAngles.x, angle, transform.eulerAngles.z);
 
 
         }
@@ -319,16 +334,11 @@ public class M011_PlayerController : MonoBehaviour
 
     }
 
-
-
-
-
-
     public float extraJumpForce;
 
     public int cantidadSaltos;
 
-    public bool Salto;
+    //public bool Salto;
 
 
 
