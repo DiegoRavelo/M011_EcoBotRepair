@@ -6,9 +6,11 @@ using UnityEngine.InputSystem;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
-    private int metalTotal;
 
-    private int tuercaTotal;
+
+    [SerializeField] private int metalTotal;
+    [SerializeField] private int muelleTotal;
+    [SerializeField] private int tuercaTotal;
 
 
 
@@ -16,8 +18,6 @@ public class GameManager : MonoBehaviour
 
     public float totalSprintTime;
     public float remainingSprintTime;
-
-    private int muelleTotal;
 
 
     private void Awake()
@@ -36,20 +36,36 @@ public class GameManager : MonoBehaviour
 
     }
 
+    private bool reparing;
 
-
-    public void Pick(InputAction.CallbackContext context)
+    public void Repear()
     {
-        if (context.started || context.performed)
-        {
-            pickable = true;
-        }
-        else
-        {
-            pickable = false;
+        reparing = true;
 
-        }
     }
+
+     public bool Reparando
+    {
+        get { return reparing; }
+        private set { reparing = value; }
+
+    }
+    
+
+
+
+    // public void Pick(InputAction.CallbackContext context)
+    // {
+    //     if (context.started || context.performed)
+    //     {
+    //         pickable = true;
+    //     }
+    //     else
+    //     {
+    //         pickable = false;
+
+    //     }
+    // }
 
     public void SumarPuntosMetal(int puntosASumar)
     {
@@ -107,11 +123,11 @@ public class GameManager : MonoBehaviour
         shadowed = !shadowed;
     }
 
-    public bool Shadowed 
+    public bool Shadowed
     {
-         get { return shadowed; }
+        get { return shadowed; }
         private set { shadowed = value; }
-        
+
     }
 
     public bool Pickable
@@ -155,7 +171,7 @@ public class GameManager : MonoBehaviour
         private set { muelleTotal = value; }
     }
 
-     // Inicialmente el nivel de carga es 1.
+    // Inicialmente el nivel de carga es 1.
     public int nivelDeCarga = 2;
 
     public void AumentarNivelDeCarga()
@@ -189,7 +205,7 @@ public class GameManager : MonoBehaviour
         {
             nivelDeCarga--;
             Debug.Log("Nivel de carga disminuido a " + nivelDeCarga);
-            
+
         }
 
 
@@ -211,7 +227,7 @@ public class GameManager : MonoBehaviour
         {
             nivelDeCarga--;
             Debug.Log("Nivel de carga disminuido a " + nivelDeCarga);
-            
+
         }
 
 

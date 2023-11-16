@@ -25,7 +25,13 @@ public class AlinToSurface : MonoBehaviour
                 transform.rotation = Quaternion.Slerp(transform.rotation, rotacionDeseada, velocidadInclinacion * Time.deltaTime);
 
             }
+            else 
+            {
+                
+
+            }
         }
+        
 
     }
 

@@ -8,6 +8,9 @@ TagManager:
   - Ground
   - Stencil
   - Siluete
+  - Muelle
+  - Tuerca
+  - Metal
   layers:
   - Default
   - TransparentFX

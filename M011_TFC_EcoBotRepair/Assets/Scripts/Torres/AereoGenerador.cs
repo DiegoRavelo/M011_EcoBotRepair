@@ -28,7 +28,7 @@ public class AereoGenerador : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Player") && GameManager.Instance.Pickable == true &&
+        if (other.CompareTag("Player") && GameManager.Instance.Reparando == true &&
         GameManager.Instance.MetalTotal >= MetalReparar &&
         GameManager.Instance.MuelleTotal >= MuelleReparar &&
         GameManager.Instance.TuercaTotal >= TuercaReparar && GameManager.Instance.NivelDeCarga >= 2)
@@ -37,7 +37,7 @@ public class AereoGenerador : MonoBehaviour
             
 
         }
-        if (other.CompareTag("Player") && GameManager.Instance.Pickable == true && torreReparada == false)
+        if (other.CompareTag("Player") && GameManager.Instance.Reparando == true && torreReparada == false)
         {
             if (GameManager.Instance.MetalTotal < MetalReparar ||
         GameManager.Instance.MuelleTotal < MuelleReparar ||
@@ -46,7 +46,7 @@ public class AereoGenerador : MonoBehaviour
                 Debug.Log("te faltan materiales");
 
         }
-        if (other.CompareTag("Player") && GameManager.Instance.NivelDeCarga <= 1 && GameManager.Instance.Pickable == true && torreReparada == false)
+        if (other.CompareTag("Player") && GameManager.Instance.NivelDeCarga <= 1 && GameManager.Instance.Reparando && torreReparada == false)
         {
 
 

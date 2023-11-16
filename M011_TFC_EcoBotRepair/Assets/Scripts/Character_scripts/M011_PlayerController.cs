@@ -147,7 +147,7 @@ public class M011_PlayerController : MonoBehaviour
 
             //Salto = true;
 
-            //CheckJump();
+            CheckJump();
 
 
         }
@@ -305,6 +305,9 @@ public class M011_PlayerController : MonoBehaviour
         if (context.started || context.performed)
         {
             IsReparing = true;
+
+            GameManager.Instance.Repear();
+            print("hola");
         }
         else
         {

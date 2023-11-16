@@ -15,4 +15,9 @@ public class Prueba : MonoBehaviour
     {
         
     }
+
+    public void Pruebaaaa()
+    {
+        print("hola");
+    }
 }

@@ -108,7 +108,7 @@ public class Enemypatrol : MonoBehaviour
                 increseTargetInt();
 
                 rangoDeAtaque = 6f;
-                rangoDeDetencion = 20f;
+                rangoDeDetencion = 15f;
 
 
 
