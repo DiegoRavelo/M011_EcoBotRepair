@@ -198,12 +198,16 @@ public class GameManager : MonoBehaviour
         if (nivelDeCarga == 2)
         {
             nivelDeCarga--;
+             ReducirCooldown();
             Debug.Log("Nivel de carga disminuido a " + nivelDeCarga);
             //ReducirCooldown();
         }
         if (nivelDeCarga == 3)
         {
             nivelDeCarga--;
+            ReducirCooldown();
+
+            print("probandoprobando");
             //ReducirCooldown();
             Debug.Log("Nivel de carga disminuido a " + nivelDeCarga);
         }
@@ -224,6 +228,7 @@ public class GameManager : MonoBehaviour
         if (nivelDeCarga == 2)
         {
             nivelDeCarga--;
+            EstablecerCooldown();
             Debug.Log("Nivel de carga disminuido a " + nivelDeCarga);
         }
         if (nivelDeCarga == 3)

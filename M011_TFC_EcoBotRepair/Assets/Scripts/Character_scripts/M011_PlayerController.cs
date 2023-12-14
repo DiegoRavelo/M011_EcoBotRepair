@@ -69,35 +69,19 @@ public class M011_PlayerController : MonoBehaviour
     {
          
 
-         InputManager.OnJumpingChange += Jump;
-
-         InputManager.OnRepairingChange += Repair;
-
-         InputManager.OnSpritingChange += Sprint;
-
-        InputManager.OnMovementChange += Move;
-
-        InputManager.OnSuperingChange += SuperSalto;
-
-        Death.OnKillChange += Killed;
-
-        Laser.OnLaserHit += Killed;
-
-        NextLevelSpaceship.OnLevelEndChange += NotPlaying;
-
 
 
     }
 
         void OnDisable()
     {
-             InputManager.OnMovementChange -= Move;
+        //      InputManager.OnMovementChange -= Move;
 
-         InputManager.OnJumpingChange -= Jump;
+        //  InputManager.OnJumpingChange -= Jump;
 
-         InputManager.OnRepairingChange -= Repair;
+        //  InputManager.OnRepairingChange -= Repair;
 
-         InputManager.OnSpritingChange -= Sprint;
+        //  InputManager.OnSpritingChange -= Sprint;
 
     }
 
@@ -176,8 +160,25 @@ public class M011_PlayerController : MonoBehaviour
 
          _directionMala = new Vector3(0 , 0 ,0);
 
-         OnEnable();
+         
+         InputManager.OnJumpingChange += Jump;
 
+         InputManager.OnRepairingChange += Repair;
+
+         InputManager.OnSpritingChange += Sprint;
+
+        InputManager.OnMovementChange += Move;
+
+        InputManager.OnSuperingChange += SuperSalto;
+
+        Death.OnKillChange += Killed;
+
+        Laser.OnLaserHit += Killed;
+
+        NextLevelSpaceship.OnLevelEndChange += NotPlaying;
+
+
+         
 
     }
 
@@ -504,6 +505,7 @@ public class M011_PlayerController : MonoBehaviour
 
     public void Sprint()
     {
+        print("probando sprint");
         
              if (!movement.isSprinting && GameManager.Instance.RemainingSprintTime > 0f)
              {
