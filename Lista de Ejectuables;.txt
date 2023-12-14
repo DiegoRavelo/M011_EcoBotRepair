@@ -1,3 +1,10 @@
 Lista de Ejectuables;
 
 Entrega 3. https://drive.google.com/drive/folders/1Hn9xZFkIP1PC-b-7_b62jUtto9omEY9k?usp=sharing
+
+!!! AVISO !!! 
+
+A veces cuando se pasa de nivel 1 a nivel 2 las torres no se pueden reparar, cierra el proyecto y abre el nivel 2 desde el menú de inicio, 
+por otra parte a veces cuando el jugador muere el sistema de cargas de energia y sprint no funciona correctamente.
+
+Ejecutable: https://drive.google.com/drive/folders/1m2zZfirvOSBX9RjByoXfSchXZWcOp3ed?usp=sharing
