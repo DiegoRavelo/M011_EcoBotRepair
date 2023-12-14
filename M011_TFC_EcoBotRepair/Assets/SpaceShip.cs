@@ -14,9 +14,11 @@ public class SpaceShip : MonoBehaviour
 
     void Start()
     {
+        main25.SetActive(false);
+        
         Invoke("Animation", 10f);
 
-        main25.SetActive(false);
+        
         
     }
 

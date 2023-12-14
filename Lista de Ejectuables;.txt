@@ -9,6 +9,8 @@ por otra parte a veces cuando el jugador muere el sistema de cargas de energia y
 del salto aumente de forma exponencial, haciendo que el jugador haga el salto con sprint sin estar sprintando. Esto pasa debido al la forma que estamos
 haciendo reaparecer al personaje, hemos encontrado una solución pero aun no hemos tenido el tiempo.
 
+// solucionado 
+
 Click derecho pulsado = reparar torres.
 
 Shift = sprint, con un solo click spprintas, volver a pulsar velocidad normal.
@@ -17,5 +19,5 @@ Shift = sprint, con un solo click spprintas, volver a pulsar velocidad normal.
 
 Ejecutable: 
 
-https://drive.google.com/drive/folders/1tXIKrD4n7AT5Dw5Rq-l0RtoKdAK4A5ku?usp=sharing
+https://drive.google.com/drive/folders/1Do9N6itZ3_KgBwUh7c3w5Q5XwRrrmlFT?usp=drive_link
 

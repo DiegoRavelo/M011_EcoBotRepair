@@ -60,18 +60,86 @@ public class M011_PlayerController : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine("Starting");
+        
 
-        OnDisable();
+        //StartCoroutine("Starting");
+
+        Deshabilitar();
+
+        _directionMala = new Vector3(0f , 0 , -1.4f );
+
+        //DOTween.To(()=> _directionMala , x=> _directionMala = x, new Vector3(0,0,0), 4f);
+
+        Invoke("Habilitar", 2f);
+
+
+        
+
+        //OnDisable();
     }
+
+  
 
     void OnEnable()
     {
+       
+    }
+
+    private void Habilitar()
+    {
+         InputManager.OnJumpingChange += Jump;
+
+       
+
+         InputManager.OnRepairingChange += Repair;
+
+         InputManager.OnSpritingChange += Sprint;
+
+        InputManager.OnMovementChange += Move;
+
+       
+
+        InputManager.OnSuperingChange += SuperSalto;
+
+        Death.OnKillChange += Killed;
+
+        Laser.OnLaserHit += Killed;
+
+        NextLevelSpaceship.OnLevelEndChange += NotPlaying;
+
+        
+         _directionMala = new Vector3(0 , 0 ,0);
          
 
 
+    }
+
+    private void Deshabilitar()
+    {
+         InputManager.OnJumpingChange -= Jump;
+
+         InputManager.OnRepairingChange -= Repair;
+
+         InputManager.OnSpritingChange -= Sprint;
+
+        InputManager.OnMovementChange -= Move;
+
+        InputManager.OnSuperingChange -= SuperSalto;
+
+        Death.OnKillChange -= Killed;
+
+        Laser.OnLaserHit -= Killed;
+
+        NextLevelSpaceship.OnLevelEndChange -= NotPlaying;
+         
 
     }
+
+ 
+    
+     
+
+    
 
         void OnDisable()
     {
@@ -97,13 +165,7 @@ public class M011_PlayerController : MonoBehaviour
 
            gameObject.tag = "Untagged";
 
-           InputManager.OnMovementChange -= Move;
-
-            InputManager.OnJumpingChange -= Jump;
-
-            InputManager.OnRepairingChange -= Repair;
-
-            InputManager.OnSpritingChange -= Sprint;
+           Deshabilitar();
 
 
            
@@ -132,55 +194,14 @@ public class M011_PlayerController : MonoBehaviour
 
         gameObject.tag = "Player";
 
-        InputManager.OnMovementChange += Move;
-
-        InputManager.OnJumpingChange += Jump;
-
-        InputManager.OnRepairingChange += Repair;
-
-        InputManager.OnSpritingChange += Sprint;
+        Habilitar();
 
 
 
     }
 
 
-     private  IEnumerator Starting()
-     {
-
-
-
-         _directionMala = new Vector3(0f , 0 , -0.71f );
-
-        yield return new WaitForSeconds(1.5f);
-
-         DOTween.To(()=> _directionMala , x=> _directionMala = x, new Vector3(0,0,0), 2f);
-
-         yield return new WaitForSeconds(2f);
-
-         _directionMala = new Vector3(0 , 0 ,0);
-
-         
-         InputManager.OnJumpingChange += Jump;
-
-         InputManager.OnRepairingChange += Repair;
-
-         InputManager.OnSpritingChange += Sprint;
-
-        InputManager.OnMovementChange += Move;
-
-        InputManager.OnSuperingChange += SuperSalto;
-
-        Death.OnKillChange += Killed;
-
-        Laser.OnLaserHit += Killed;
-
-        NextLevelSpaceship.OnLevelEndChange += NotPlaying;
-
-
-         
-
-    }
+  
 
     
 
