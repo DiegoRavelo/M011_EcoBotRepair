@@ -36,11 +36,17 @@ public class GameManager : MonoBehaviour
 
     }
 
-    private bool reparing;
+    [SerializeField]  private bool reparing;
 
     public void Repear()
     {
         reparing = true;
+
+    }
+
+    public void NotRepear()
+    {
+        reparing = false;
 
     }
 
@@ -193,16 +199,18 @@ public class GameManager : MonoBehaviour
         {
             nivelDeCarga--;
             Debug.Log("Nivel de carga disminuido a " + nivelDeCarga);
-            ReducirCooldown();
+            //ReducirCooldown();
         }
         if (nivelDeCarga == 3)
         {
             nivelDeCarga--;
-            ReducirCooldown();
+            //ReducirCooldown();
             Debug.Log("Nivel de carga disminuido a " + nivelDeCarga);
         }
         if (nivelDeCarga == 4)
         {
+            
+
             nivelDeCarga--;
             Debug.Log("Nivel de carga disminuido a " + nivelDeCarga);
 

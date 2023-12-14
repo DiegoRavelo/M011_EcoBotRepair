@@ -2,53 +2,94 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Cinemachine;
 
 public class GrabObjects : MonoBehaviour
 {
 
-    private bool adherido = false;
+   
 
-    private bool adherible;
+    public GameObject cable;
 
-    public GameObject cubo;
+    public GameObject bateriaFake;
 
-    private void OnTriggerEnter(Collider other)
+    public Animator anim;
+
+    public CinemachineVirtualCamera virtualCameraBattery;
+
+     public CinemachineVirtualCamera virtualCameraCable;
+
+    public CinemachineVirtualCamera OriginalvirtualCamera;
+
+    void Start()
     {
-        if (other.CompareTag("Battery"))
+        cable.SetActive(false);
+
+        bateriaFake.SetActive(false);
+
+        anim.Play("Pick");
+
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Cable"))
         {
-            cubo = other.gameObject;
-            adherible = true;
+           
+
+             Destroy(other.gameObject);
+
+             cable.SetActive(true);
+
+             
+
+             
+
+             //GrabingCable();
+
+        }
+
+         if (other.CompareTag("Battery"))
+        {
+             Destroy(other.gameObject);
+
+             bateriaFake.SetActive(true);
+
+            virtualCameraBattery.Priority = OriginalvirtualCamera.Priority + 1 ;
+
+            Invoke("HandleCameraRetrun", 4f);
+
+             
+
+             //GrabingCable();
+
         }
 
     }
+
+     private void HandleCameraRetrun()
+    {
+        virtualCameraBattery.Priority = OriginalvirtualCamera.Priority - 1 ;
+
+        //OriginalvirtualCamera.Priority = 11;
+
+    }
+
+
+    private bool picking;
 
 
     public void ArrastrarObj(InputAction.CallbackContext context)
     {
 
-        if (context.started && adherible)
-
+        if (context.started || context.performed)
         {
-
-            if (!adherido)
-            {
-                // Mueve el cubo justo delante del personaje y lo convierte en un hijo del personaje.
-                cubo.transform.position = transform.position + transform.forward * -1.0f;
-                cubo.transform.SetParent(transform);
-
-
-                cubo.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-                adherido = true;
-            }
-            else
-            {
-                // Desvincula el cubo del personaje.
-
-                cubo.transform.SetParent(null);
-                cubo.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-                adherido = false;
-            }
-
+            picking = true;
+           
+        }
+        else 
+        {
+            picking = false;
         }
 
     }

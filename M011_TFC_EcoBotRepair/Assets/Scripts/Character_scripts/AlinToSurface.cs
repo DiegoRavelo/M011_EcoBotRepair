@@ -16,7 +16,7 @@ public class AlinToSurface : MonoBehaviour
     public void AlinToSurfaceFunc()
     {
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, Vector3.down, out hit, 1.6f))
+        if (Physics.Raycast(transform.position, Vector3.down * 2f, out hit, 1.6f))
         {
             if (hit.collider.CompareTag("Ground"))
             {

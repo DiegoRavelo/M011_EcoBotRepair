@@ -12,8 +12,7 @@ public class StencilEnterExtit : MonoBehaviour
 
     public Vector3 nuevaEscala;
 
-    //public MeshRenderer CharacterTexture;
-    //public MeshRenderer CharacterTextureChain;
+   
 
 
     void Awake()
@@ -22,53 +21,45 @@ public class StencilEnterExtit : MonoBehaviour
 
     }
 
-    // void OnTriggerEnter(Collider other)
-    // {
-    //     if (other.CompareTag("Player"))
-    //     {
-    //         if (shadowed == true)
-    //         {
-    //             shadowed = false;
-    //             print(shadowed);
+   
 
-    //         }
+    void Update()
+    {
+        if(shadowed)
+        {
+             target.transform.localScale = Vector3.Lerp(target.transform.localScale , new Vector3(1,1,1), Time.deltaTime * 5f);
 
-    //         else
-    //         {
-    //             shadowed = true;
-    //             print(shadowed);
+        }
+        else
+        {
+             
+                target.transform.localScale = Vector3.Lerp(target.transform.localScale , Vector3.zero , Time.deltaTime * 5f);
 
-    //         }
+        }
 
-    //         //shadowed = !shadowed;
-    //     }
+    }
 
-
-    // }
+ 
 
     private bool shadowed;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Siluete"))
+    
+        if (other.CompareTag("Player"))
         {
-            if (GameManager.Instance.Shadowed == true)
-            {
-                other.transform.localScale = nuevaEscala;
-                //CharacterTexture.enabled = false;
-                //CharacterTextureChain.enabled = false;
-            }
-            else
-            {
-                other.transform.localScale = Vector3.zero;
-                //CharacterTexture.enabled = true;
-                //CharacterTextureChain.enabled = true;
-            }
+            shadowed = true;
+           
+              
+
+              
+         
+           
 
 
         }
 
-        GameManager.Instance.ShadowChange();
+        
 
         //shadowed = !shadowed;
 
@@ -78,70 +69,20 @@ public class StencilEnterExtit : MonoBehaviour
     
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Siluete"))
+        if (other.CompareTag("Player"))
         {
-            if (GameManager.Instance.Shadowed == true)
-            {
-                other.transform.localScale = nuevaEscala;
-                //CharacterTexture.enabled = false;
-                //CharacterTextureChain.enabled = false;
-            }
-            else
-            {
-                other.transform.localScale = Vector3.zero;
-                //CharacterTexture.enabled = true;
-                //CharacterTextureChain.enabled = true;
-                print("hola");
-            }
-
+            shadowed = false;
+           
+            
+                
 
         }
 
-        GameManager.Instance.ShadowChange();
-
+      
         //shadowed = !shadowed;
 
 
     }
 
-    public float scaleChangeSpeed = 2.0f;
-
-    public void Update()
-    {
-
-        if (GameManager.Instance.Shadowed == true)
-        {
-            //target. transform.localScale = nuevaEscala;
-
-            Vector3 currentScale = target.transform.localScale;
-
-            target.transform.localScale = Vector3.Lerp(currentScale, nuevaEscala, Time.deltaTime * scaleChangeSpeed);
-
-            //target.transform.localScale = nuevaEscala;
-
-            //CharacterTexture.enabled = false;
-            //CharacterTextureChain.enabled = false;
-
-        
-
-        }
-        if (GameManager.Instance.Shadowed == false)
-        {
-            Vector3 currentScale = target.transform.localScale;
-
-            target.transform.localScale = Vector3.Lerp(currentScale, Vector3.zero, Time.deltaTime * scaleChangeSpeed);
-
-           //if (target.transform.localScale.x < 0.8f)
-            //{
-                //CharacterTexture.enabled = true;
-                //CharacterTextureChain.enabled = true;
-            //}
-
-            //target.transform.localScale = Vector3.zero;
-        }
-
-
-
-
-    }
+  
 }

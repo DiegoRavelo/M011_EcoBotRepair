@@ -9,7 +9,10 @@ public class SpriteContador : MonoBehaviour
  
 
     private Image imageComponent;
+
     public UnityEngine.Sprite[] tilesCon;
+
+    
 
     private void Start()
      {

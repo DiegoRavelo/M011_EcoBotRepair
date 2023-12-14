@@ -23,8 +23,6 @@ public class AnimationChanges : MonoBehaviour
     private void ChangeAnimationState(int a, string newState)
     {
 
-        
-
         animators[a].Play(newState);
 
         if( a == 0 )
