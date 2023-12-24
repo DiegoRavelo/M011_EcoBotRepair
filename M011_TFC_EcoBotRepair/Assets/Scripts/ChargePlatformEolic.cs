@@ -105,7 +105,6 @@ public class ChargePlatformEolic : MonoBehaviour
 
     private void HandleActivateParticles(int tower, bool isActive)
     {
-        print("pepitogrillo");
 
         if(plataformaNumero == tower)
         {

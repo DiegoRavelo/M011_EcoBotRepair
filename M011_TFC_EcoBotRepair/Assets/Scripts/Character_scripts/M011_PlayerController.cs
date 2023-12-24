@@ -20,12 +20,17 @@ public class M011_PlayerController : MonoBehaviour
 
     private static Vector2 _input;
 
-    private static Vector3 _direction;
+    [SerializeField]
+    public Vector3 _direction;
 
     private static Vector3 _directionMala;
 
     private static Vector3 _directionGrav;
     private static CharacterController _characterController;
+
+      InputManager _inputManager;
+
+
 
     [SerializeField] private float _gravity = -9.81f;
     [SerializeField] private float gravityMultiplier = 3.0f;
@@ -46,11 +51,23 @@ public class M011_PlayerController : MonoBehaviour
 
     public Animator animator;
 
+    [SerializeField]
+
+    AudioPlay _audioPlay;
+
+
+
+
+
 
 
     private void Awake()
     {
         _characterController = GetComponent<CharacterController>();
+
+        _audioPlay = FindObjectOfType<AudioPlay>();
+
+        
 
         
 
@@ -60,17 +77,23 @@ public class M011_PlayerController : MonoBehaviour
 
     private void Start()
     {
+        _inputManager = FindObjectOfType<InputManager>();
         
 
         //StartCoroutine("Starting");
 
-        Deshabilitar();
+        //Deshabilitar();
 
-        _directionMala = new Vector3(0f , 0 , -1.4f );
+        //_directionMala = new Vector3(0f , 0 , -1.4f );
 
         //DOTween.To(()=> _directionMala , x=> _directionMala = x, new Vector3(0,0,0), 4f);
 
-        Invoke("Habilitar", 2f);
+        //Invoke("Habilitar", 2f);
+
+        //Habilitar();
+
+
+        Death.OnKillChange += Killed;
 
 
         
@@ -82,76 +105,15 @@ public class M011_PlayerController : MonoBehaviour
 
     void OnEnable()
     {
+         Death.OnKillChange += Killed;
+         NextLevelSpaceship.OnLevelEndChange += NotPlaying;
        
     }
 
-    private void Habilitar()
-    {
-         InputManager.OnJumpingChange += Jump;
-
-       
-
-         InputManager.OnRepairingChange += Repair;
-
-         InputManager.OnSpritingChange += Sprint;
-
-        InputManager.OnMovementChange += Move;
-
-       
-
-        InputManager.OnSuperingChange += SuperSalto;
-
-        Death.OnKillChange += Killed;
-
-        Laser.OnLaserHit += Killed;
-
-        NextLevelSpaceship.OnLevelEndChange += NotPlaying;
-
-        
-         _directionMala = new Vector3(0 , 0 ,0);
-         
-
-
-    }
-
-    private void Deshabilitar()
-    {
-         InputManager.OnJumpingChange -= Jump;
-
-         InputManager.OnRepairingChange -= Repair;
-
-         InputManager.OnSpritingChange -= Sprint;
-
-        InputManager.OnMovementChange -= Move;
-
-        InputManager.OnSuperingChange -= SuperSalto;
-
-        Death.OnKillChange -= Killed;
-
-        Laser.OnLaserHit -= Killed;
-
-        NextLevelSpaceship.OnLevelEndChange -= NotPlaying;
-         
-
-    }
-
- 
-    
-     
+   
 
     
 
-        void OnDisable()
-    {
-        //      InputManager.OnMovementChange -= Move;
-
-        //  InputManager.OnJumpingChange -= Jump;
-
-        //  InputManager.OnRepairingChange -= Repair;
-
-        //  InputManager.OnSpritingChange -= Sprint;
-
-    }
 
     private void NotPlaying()
     {
@@ -163,20 +125,14 @@ public class M011_PlayerController : MonoBehaviour
     {   
            //Scene_Manager.Instance.LoadLevel1();
 
+            _inputManager.Nulled();
+
            gameObject.tag = "Untagged";
-
-           Deshabilitar();
-
-
-           
-
-        
 
            OnAnimationChange?.Invoke(2, "Death");
 
            _directionMala = Vector3.zero;
 
-            
             StartCoroutine("Respawn");
 
     }
@@ -194,8 +150,6 @@ public class M011_PlayerController : MonoBehaviour
 
         gameObject.tag = "Player";
 
-        Habilitar();
-
 
 
     }
@@ -209,19 +163,23 @@ public class M011_PlayerController : MonoBehaviour
     
 
     public void Move(Vector2 input)
-    {
-        //print(input);
-        
-            _input = input;
-
-        //_input = context.ReadValue<Vector2>();
-
-
+    {  
+         _input = input;
 
         _directionMala = new Vector3(_input.x, y: 0.0f, z: _input.y);
 
         var matrix = Matrix4x4.Rotate(Quaternion.Euler(0, 45, 0));
+        
+        
 
+        
+        
+        
+       
+            
+        //_direction = matrix.MultiplyPoint3x4(_directionMala);
+
+         
         if(IsGrounded() == true)
         {
              _direction = matrix.MultiplyPoint3x4(_directionMala);
@@ -233,15 +191,13 @@ public class M011_PlayerController : MonoBehaviour
 
         }
 
+
        
-
-        
-
-        
-
 
 
     }
+
+    public float VelocidaTarj;
 
 
 
@@ -250,10 +206,15 @@ public class M011_PlayerController : MonoBehaviour
 
         var targetSpeed = movement.isSprinting ? movement.speed * movement.multiplier : movement.speed;
 
-        movement.currentSpeed = Mathf.MoveTowards(movement.currentSpeed, targetSpeed, movement.acceleration * Time.deltaTime);
+         VelocidaTarj = targetSpeed;
 
+        movement.currentSpeed = Mathf.MoveTowards(movement.currentSpeed, targetSpeed, movement.acceleration * Time.deltaTime);
+        
+       
+            
         _characterController.Move(_direction * movement.currentSpeed * Time.deltaTime);
 
+        
         if (IsGrounded() && movement.isSprinting == false)
         {
 
@@ -262,6 +223,10 @@ public class M011_PlayerController : MonoBehaviour
             var matrix = Matrix4x4.Rotate(Quaternion.Euler(0, 45, 0)); 
 
             _direction = matrix.MultiplyPoint3x4(_directionMala);
+
+             
+
+             //_audioPlay.PlaySound(0);
         }
 
         if (IsGrounded() && movement.isSprinting == true)
@@ -273,37 +238,64 @@ public class M011_PlayerController : MonoBehaviour
             _direction = matrix.MultiplyPoint3x4(_directionMala);
         }
 
-    
+     
 
 
 
     }
 
 
+        public void Sprint()
+    {
+        print("probando sprint");
+        
+             if (!movement.isSprinting && GameManager.Instance.RemainingSprintTime > 0f)
+             {
+
+                movement.isSprinting = true;
+
+
+             if (GameManager.Instance.RemainingSprintTime == 5f && GameManager.Instance.NivelDeCarga == 3)
+                  {
+                    print("hola");
+
+                    GameManager.Instance.DisminuirNivelDeCarga();
+
+               }
+
+
+             }
+             else if (movement.isSprinting)
+            {
+
+
+                movement.isSprinting = false;
+
+            }
+
+         
+
+    }
+
+
+
     public void Jump()
     {
 
-        if (GameManager.Instance.NivelDeCarga >= 2)
+        if (GameManager.Instance.NivelDeCarga >= 2 && GameManager.Instance.JumpCount > 0)
         {
-            //if (!context.started) return;
-
+           
             if (!IsGrounded()) return;
 
             _velocity = jumpPower / 2;
 
-            if (!movement.isSprinting)
-            {
-                movement.currentSpeed = movement.currentSpeed * 2f;
-            }
+            GameManager.Instance.ReducirSalto();
 
-            if (movement.isSprinting == true)
-            {
-                movement.currentSpeed = movement.currentSpeed * 2f;
-            }
+             _direction = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0) * Vector3.forward;
 
-            _direction = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0) * Vector3.forward;
+             
+            OnAnimationChange?.Invoke(2 , "Jump");
 
-            cantidadSaltos += 1;
 
             //animator.Play("Jump1");
 
@@ -313,7 +305,7 @@ public class M011_PlayerController : MonoBehaviour
 
             //Salto = true;
 
-            CheckJump();
+            //CheckJump();
 
 
         }
@@ -322,15 +314,20 @@ public class M011_PlayerController : MonoBehaviour
 
     }
 
+
+
     public void SuperSalto()
     {
         print("hola");
+
+        GameManager.Instance.ReducirCooldown();
 
         if(GameManager.Instance.NivelDeCarga == 4)
         {
              if (!IsGrounded()) return;
 
             _velocity = jumpPower * 2;
+
 
             //GameManager.Instance.DisminuirNivelDeCarga();
             //GameManager.Instance.DisminuirNivelDeCarga();
@@ -347,23 +344,7 @@ public class M011_PlayerController : MonoBehaviour
         }
     }
 
-    public void CheckJump()
-    {
-        if (cantidadSaltos == 3 && isJumping == true && GameManager.Instance.NivelDeCarga >= 2)
-        {
-            //print(cantidadSaltos);
-
-            GameManager.Instance.DisminuirNivelDeCargaPorSalto();
-            
-
-            //Salto = false;
-
-            cantidadSaltos = 0;
-
-        }
-
-    }
-
+  
     private void ApplyGravity()
     {
         if (IsGrounded() && _velocity < 0.0f)
@@ -444,7 +425,6 @@ public class M011_PlayerController : MonoBehaviour
         }
         if(isJumping == true)
         {
-            OnAnimationChange?.Invoke(2 , "Jump");
             OnParticleChange?.Invoke(2, true );
 
              
@@ -524,39 +504,6 @@ public class M011_PlayerController : MonoBehaviour
     }
 
 
-    public void Sprint()
-    {
-        print("probando sprint");
-        
-             if (!movement.isSprinting && GameManager.Instance.RemainingSprintTime > 0f)
-             {
-
-                movement.isSprinting = true;
-
-
-             if (GameManager.Instance.RemainingSprintTime == 5f && GameManager.Instance.NivelDeCarga == 3)
-                  {
-                    print("hola");
-
-                     GameManager.Instance.DisminuirNivelDeCarga();
-
-               }
-
-
-             }
-             else if (movement.isSprinting)
-            {
-
-
-                movement.isSprinting = false;
-
-
-
-            }
-
-         
-
-    }
 
     private bool IsReparing;
 
@@ -564,7 +511,6 @@ public class M011_PlayerController : MonoBehaviour
 
      public void Repair(bool reparando)
     {
-        
         if (reparando == true)
         {
             IsReparing = true;

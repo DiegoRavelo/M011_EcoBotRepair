@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ChargePlatDouble : MonoBehaviour
 {
-    // Start is called before the first frame update
+    
     public int plataformaNumero;
 
     public int nivelMaximoCarga;
@@ -37,14 +37,14 @@ public class ChargePlatDouble : MonoBehaviour
 
 
 
-    // Update is called once per frame
+    
     void Update()
     {
        
 
         if(LevelManager.Instance.GetTower(plataformaNumero - 1) && LevelManager.Instance.GetBattery(plataformaNumero - 1) && LevelManager.Instance.GetCable(plataformaNumero -1) )
         {
-            print("golaaaaa");
+            
 
         
         
@@ -102,18 +102,22 @@ public class ChargePlatDouble : MonoBehaviour
 
             if(GameManager.Instance.NivelDeCarga < nivelMaximoCarga && TiempoEnPlataforma >= 2f)
             {
-                GameManager.Instance.AumentarNivelDeCarga();
+               
+
+                 GameManager.Instance.AumentarNivelDeCarga();
+
+                  TiempoEnPlataforma = 0f;
 
 
 
-                  if( GameManager.Instance.NivelDeCarga >= 3)
-                 {
-                GameManager.Instance.EstablecerCooldown();
-                }
+              
+                //   if( GameManager.Instance.NivelDeCarga >= 3)
+                //  {
+                // GameManager.Instance.EstablecerCooldown();
+                // }
 
 
-                TiempoEnPlataforma = 0f;
-
+                
                     
 
             }
@@ -122,6 +126,12 @@ public class ChargePlatDouble : MonoBehaviour
 
 
 
+    }
+
+    private void NivelDeCarga()
+    {
+          GameManager.Instance.AumentarNivelDeCarga();
+        
     }
 
 

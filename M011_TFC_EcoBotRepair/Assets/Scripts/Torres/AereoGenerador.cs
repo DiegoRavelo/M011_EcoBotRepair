@@ -22,7 +22,16 @@ public class AereoGenerador : MonoBehaviour
     
     public UnityEngine.Sprite[] tilesCon;
 
+    public ParticleSystem[] sp;
+
     public Animator[] TowerPop;
+
+    [SerializeField]
+
+    private AudioClip[] clips;
+
+
+    private AudioSource audioSource;
     
     
 
@@ -31,6 +40,9 @@ public class AereoGenerador : MonoBehaviour
 
     void Start()
     {
+
+        audioSource = GetComponent<AudioSource>();
+
         LevelManager.TowerStateChanged += HandleCameraTransition;
 
         //virtualCamera.OnTargetObjectWarped += HandleCameraWarped;
@@ -73,20 +85,44 @@ public class AereoGenerador : MonoBehaviour
         {
             // Si el jugador está reparando y cumple con las condiciones, iniciar la reparación
             reparando = true;
+            
             sliderAnim.Play("Reparando");
+
+            if(!audioSource.isPlaying)
+            {
+                  audioSource.Play();
+
+            }
+
+          
         }
-        else if (!gameManager.Reparando)
+        else if (!gameManager.Reparando && torreReparada == false)
         {
             // Si el jugador no está reparando, detener la reparación
             reparando = false;
             tiempoReparando = 0f;
+            audioSource.Stop();
             sliderAnim.Play("Idle");
+
+            
+
+           // audioSource.Stop();
         }
 
         if (torreReparada)
         {
             // Si la torre ya está reparada, reproducir la animación "Idle"
             sliderAnim.Play("Idle");
+
+             var em1 = sp[0].emission;
+             var em2 = sp[1].emission;
+               
+        
+
+    
+                em1.rateOverTime = 0f;
+                em2.rateOverTime = 0f;
+                
         }
     }
         
@@ -126,6 +162,8 @@ public class AereoGenerador : MonoBehaviour
             reparando = false;
             tiempoReparando = 0f;
             sliderAnim.Play("Idle");
+
+              audioSource.Stop();
 
             
 
@@ -198,6 +236,12 @@ public class AereoGenerador : MonoBehaviour
             virtualCamera.Priority = OriginalvirtualCamera.Priority + 1 ;
 
             Invoke("HandleCameraRetrun", 4f);
+
+            audioSource.clip = clips[0];
+
+            audioSource.loop = true;
+
+            audioSource.Play();
 
         }
 

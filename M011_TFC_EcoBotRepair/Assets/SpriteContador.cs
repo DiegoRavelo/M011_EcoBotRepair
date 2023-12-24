@@ -49,6 +49,12 @@ public class SpriteContador : MonoBehaviour
             
         }
 
+          if(material == "jump")
+        {
+            total = GameManager.Instance.JumpCount;
+            
+        }
+
 
 
 

@@ -65,13 +65,11 @@ public class ColorChangCall : MonoBehaviour
             {
                  ColorAnimation();
 
-                 bool reparado = true;
-
                 objeto.tag = "Cargado";
 
                  if(called == false)
                  {
-                    OnEnergyChange?.Invoke(towerToObserve, reparado);
+                    OnEnergyChange?.Invoke(towerToObserve, true );
 
                     called = true;
 

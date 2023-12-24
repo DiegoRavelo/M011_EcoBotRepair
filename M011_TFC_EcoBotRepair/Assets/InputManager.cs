@@ -13,13 +13,90 @@ public class InputManager : MonoBehaviour
 
     private static Vector2 _directionMala;
 
+    [SerializeField]
+
+    M011_PlayerController _playerController ;
+
+     [SerializeField]
+
+    IdleSound _idleSound;
+
+
+
+
+    public void Start()
+    {
+         _playerController = FindObjectOfType<M011_PlayerController>();
+        //_playerController = GetComponent<M011_PlayerController>();
+         Death.OnKillChange += Nulled;
+
+         _idleSound = FindObjectOfType<IdleSound>();
+
+        
+    }
+
+    public void OnEnable()
+    {
+        Death.OnKillChange += Nulled;
+
+    }
+
+    public void Nulled()
+    {
+        StartCoroutine("Nulling");
+
+        //_playerController = null;
+    
+
+    }
+
+    public IEnumerator Nulling()
+     {
+         _playerController = null;
+
+         yield return new WaitForSeconds(1.5f);
+
+          _playerController = FindObjectOfType<M011_PlayerController>();
+
+     }
+
+
+
 
     public void Move(InputAction.CallbackContext context)
     {
 
+
         input = context.ReadValue<Vector2>();
 
-        OnMovementChange?.Invoke(input);
+        if(_playerController != null)
+        {
+             _playerController.Move(input);
+
+             if(context.started)
+             {
+                _idleSound.PlayFadeIn();
+               
+
+                print(context);
+
+             }  if(context.canceled)
+             {
+                 _idleSound.PlayFadeOut();
+                
+
+                 print(context);
+
+             }
+         
+
+
+        }
+
+        //OnMovementChange?.Invoke(input);
+
+        
+
 
 
 
@@ -32,9 +109,11 @@ public class InputManager : MonoBehaviour
 
     public void Jump(InputAction.CallbackContext context)
     {
-        if(context.started)
+        if(context.started && _playerController != null)
         {
-             OnJumpingChange?.Invoke();
+             //OnJumpingChange?.Invoke();
+
+             _playerController.Jump();
 
         }
        
@@ -48,7 +127,13 @@ public class InputManager : MonoBehaviour
     public void Super(InputAction.CallbackContext context)
     {
         
-             OnSuperingChange?.Invoke();
+             //OnSuperingChange?.Invoke();
+             if(_playerController != null)
+             {
+                _playerController.SuperSalto();
+
+             }
+             
 
         
        
@@ -62,13 +147,13 @@ public class InputManager : MonoBehaviour
 
     public void Repair(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && _playerController != null)
         {
-            OnRepairingChange?.Invoke(true);
+            _playerController.Repair(true);
         }
-        else if (context.canceled)
+        else if (context.canceled && _playerController != null)
         {
-            OnRepairingChange?.Invoke(false);
+            _playerController.Repair(false);
         }
 
 
@@ -81,7 +166,7 @@ public class InputManager : MonoBehaviour
 
     public void Pause(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.started && _playerController != null)
         {
                OnPausingChange?.Invoke();
             
@@ -96,9 +181,11 @@ public class InputManager : MonoBehaviour
 
     public void Sprint(InputAction.CallbackContext context)
     {
-        if(context.started)
+        if(context.started && _playerController != null)
         {
-            OnSpritingChange?.Invoke();
+            //OnSpritingChange?.Invoke();
+
+            _playerController.Sprint();
 
         }
     

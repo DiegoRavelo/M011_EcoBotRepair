@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int metalTotal;
     [SerializeField] private int muelleTotal;
     [SerializeField] private int tuercaTotal;
+    [SerializeField] private int jumpCount;
 
 
 
@@ -177,20 +178,75 @@ public class GameManager : MonoBehaviour
         private set { muelleTotal = value; }
     }
 
+     public int JumpCount
+    {
+        get { return jumpCount; }
+        private set { jumpCount = value; }
+    }
+       public void EstablecerSaltos()
+    {
+        jumpCount = 3;
+
+    }
+
+       public void ReducirSalto()
+    {
+         if(jumpCount > 1)
+        {
+            jumpCount--;
+            
+            ///jumpCount++;
+            //jumpCount--;
+
+        }
+        else
+        {
+            DisminuirNivelDeCargaPorSalto();
+             
+
+
+        }
+
+       
+       
+    }
+
     // Inicialmente el nivel de carga es 1.
     public int nivelDeCarga = 2;
 
     public void AumentarNivelDeCarga()
     {
-        if (nivelDeCarga < 4)
+        
+       
+    
+
+        if(nivelDeCarga == 1)
+        {
+              nivelDeCarga++;
+              EstablecerSaltos();
+
+        }
+
+         else if  (nivelDeCarga == 2)
         {
             nivelDeCarga++;
-            Debug.Log("Nivel de carga aumentado a " + nivelDeCarga);
+            EstablecerSaltos();
+            EstablecerCooldown();
+        
+            Debug.Log("Nivel de carga aumentado a  " + nivelDeCarga);
+            //ReducirCooldown();
         }
-        else
+        else if (nivelDeCarga == 3)
         {
-            Debug.Log("El nivel de carga ya está en su máximo valor.");
+            nivelDeCarga++;
+            EstablecerSaltos();
+            EstablecerCooldown();
+        
+
+           
+            Debug.Log("Nivel de carga aumentado a  " + nivelDeCarga);
         }
+       
     }
 
     public void DisminuirNivelDeCargaPorSalto()
@@ -198,16 +254,18 @@ public class GameManager : MonoBehaviour
         if (nivelDeCarga == 2)
         {
             nivelDeCarga--;
-             ReducirCooldown();
+            JumpCount = 0;
+            ReducirCooldown();
             Debug.Log("Nivel de carga disminuido a " + nivelDeCarga);
             //ReducirCooldown();
         }
         if (nivelDeCarga == 3)
         {
             nivelDeCarga--;
+            EstablecerSaltos();
             ReducirCooldown();
 
-            print("probandoprobando");
+            
             //ReducirCooldown();
             Debug.Log("Nivel de carga disminuido a " + nivelDeCarga);
         }
@@ -216,6 +274,7 @@ public class GameManager : MonoBehaviour
             
 
             nivelDeCarga--;
+            EstablecerSaltos();
             Debug.Log("Nivel de carga disminuido a " + nivelDeCarga);
 
         }
