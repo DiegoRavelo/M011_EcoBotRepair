@@ -121,7 +121,7 @@ public class M011_PlayerController : MonoBehaviour
 
     }
 
-    private void Killed()
+    public void Killed()
     {   
            //Scene_Manager.Instance.LoadLevel1();
 
@@ -152,6 +152,11 @@ public class M011_PlayerController : MonoBehaviour
 
 
 
+    }
+
+    public void ControllOff()
+    {
+        _direction = Vector3.zero;
     }
 
 
@@ -293,8 +298,12 @@ public class M011_PlayerController : MonoBehaviour
 
              _direction = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0) * Vector3.forward;
 
+          
+
              
             OnAnimationChange?.Invoke(2 , "Jump");
+
+               _audioPlay.PlaySound(3);
 
 
             //animator.Play("Jump1");

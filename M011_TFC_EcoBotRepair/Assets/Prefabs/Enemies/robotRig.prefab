@@ -164,20 +164,9 @@ MonoBehaviour:
   TreshHold: 1
   speed: 8
   rotationSpeed: 3.5
-  patroling: 0
-  Ataque: 0
-  Detencion: 0
-  capaDeljugador:
-    serializedVersion: 2
-    m_Bits: 128
-  target: {fileID: 0}
-  AttackDone: 0
-  currentTime: 0
-  ChangeDone: 0
-  distanceToPlayer: 0.95
-  rangoDeAtaque: 12.55
-  rangoDeDetencion: 20.71
-  rangoDeOlividar: 0
+  anim: {fileID: 0}
+  estadoActual: 0
+  sprint: 0
 --- !u!1001 &7541650668529287989
 PrefabInstance:
   m_ObjectHideFlags: 0

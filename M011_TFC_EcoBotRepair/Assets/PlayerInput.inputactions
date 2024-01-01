@@ -272,15 +272,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Look",
-                    "type": "PassThrough",
-                    "id": "e4e685c9-4464-42d6-ae05-d59da78b04fe",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "MouseZoom",
                     "type": "PassThrough",
                     "id": "2b1e69b0-6316-4f39-a283-9b66f8ee1f04",
@@ -288,6 +279,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Interact ",
+                    "type": "Button",
+                    "id": "d2f70ccf-35de-4161-8e6a-f0a2bc888183",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -403,23 +403,23 @@
                 },
                 {
                     "name": "",
-                    "id": "ec786671-d335-432c-9a10-1313d800a2ab",
-                    "path": "<Mouse>/delta",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Look",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "fa77221c-b2c8-4287-851f-e20c37655252",
                     "path": "<Mouse>/scroll/y",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "MouseZoom",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2bf6786b-ef7d-4b3d-89df-280afb363bfc",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interact ",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

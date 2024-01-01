@@ -13,6 +13,8 @@ public class InputManager : MonoBehaviour
 
     private static Vector2 _directionMala;
 
+    public static InputManager Instance {get; private set;}
+
     [SerializeField]
 
     M011_PlayerController _playerController ;
@@ -30,7 +32,15 @@ public class InputManager : MonoBehaviour
         //_playerController = GetComponent<M011_PlayerController>();
          Death.OnKillChange += Nulled;
 
+         
+
          _idleSound = FindObjectOfType<IdleSound>();
+
+         if(Instance == null)
+         {
+            Instance = this;
+         }
+         
 
         
     }
@@ -49,6 +59,7 @@ public class InputManager : MonoBehaviour
     
 
     }
+
 
     public IEnumerator Nulling()
      {
@@ -78,14 +89,13 @@ public class InputManager : MonoBehaviour
                 _idleSound.PlayFadeIn();
                
 
-                print(context);
+               
 
              }  if(context.canceled)
              {
                  _idleSound.PlayFadeOut();
                 
 
-                 print(context);
 
              }
          
@@ -187,6 +197,32 @@ public class InputManager : MonoBehaviour
 
             _playerController.Sprint();
 
+        }
+    
+
+    }
+
+      public bool Interacting
+    {
+        get { return interacting; }
+        private set { interacting = value; }
+
+    }
+
+    public bool interacting;
+
+    
+      public void Interact(InputAction.CallbackContext context)
+    {
+        if(context.started || context.performed)
+        {
+            interacting = true;
+            
+        }
+         else if(context.canceled)
+        {
+            interacting = false;
+            
         }
     
 

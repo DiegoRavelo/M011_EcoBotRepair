@@ -15,6 +15,8 @@ TagManager:
   - Cargado
   - Descargado
   - Cable
+  - Wall
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -25,7 +27,7 @@ TagManager:
   - Stencil
   - Player
   - Cables
-  - 
+  - PickUp
   - 
   - 
   - 

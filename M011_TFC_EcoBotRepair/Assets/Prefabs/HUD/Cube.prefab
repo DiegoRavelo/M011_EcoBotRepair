@@ -1,0 +1,152 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8954068279592770219
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7946690732393993826}
+  - component: {fileID: 23716018310475320}
+  - component: {fileID: 1348687397929832737}
+  m_Layer: 0
+  m_Name: Cube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7946690732393993826
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8954068279592770219}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 43.66, y: 51.4, z: -10.11}
+  m_LocalScale: {x: 6.3122, y: 6.3122, z: 6.3122}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1552818743890933997}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &23716018310475320
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8954068279592770219}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 1.11
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1348687397929832737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8954068279592770219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a4768090c2769e47bd2b56426483eee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue:
+    name: Asistente EcoBot
+    sentences:
+    - "Bienvenido al nivel 1 de eco bot repair, ser\xE9 tu peque\xF1o asitente en
+      tus aventura."
+    - No se que mas inventar esto es un ejemplo
+    - Hola chiccos feliz navidad aqui seguimos
+    - 'Necesito una textura y modelo para el texto pero ya es funcional o eso creo(solo
+      he seguido un tutorial de internet) '
+--- !u!1001 &2051036209332121356
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 7946690732393993826}
+    m_Modifications:
+    - target: {fileID: 194171931361791323, guid: 48230bce5905cfb488cad83747b91213, type: 3}
+      propertyPath: m_Name
+      value: monitor
+      objectReference: {fileID: 0}
+    - target: {fileID: 718894767112165345, guid: 48230bce5905cfb488cad83747b91213, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 9.843
+      objectReference: {fileID: 0}
+    - target: {fileID: 718894767112165345, guid: 48230bce5905cfb488cad83747b91213, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 9.843
+      objectReference: {fileID: 0}
+    - target: {fileID: 718894767112165345, guid: 48230bce5905cfb488cad83747b91213, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 9.843
+      objectReference: {fileID: 0}
+    - target: {fileID: 718894767112165345, guid: 48230bce5905cfb488cad83747b91213, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 718894767112165345, guid: 48230bce5905cfb488cad83747b91213, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.425
+      objectReference: {fileID: 0}
+    - target: {fileID: 718894767112165345, guid: 48230bce5905cfb488cad83747b91213, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 718894767112165345, guid: 48230bce5905cfb488cad83747b91213, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071067
+      objectReference: {fileID: 0}
+    - target: {fileID: 718894767112165345, guid: 48230bce5905cfb488cad83747b91213, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 718894767112165345, guid: 48230bce5905cfb488cad83747b91213, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 718894767112165345, guid: 48230bce5905cfb488cad83747b91213, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 718894767112165345, guid: 48230bce5905cfb488cad83747b91213, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 718894767112165345, guid: 48230bce5905cfb488cad83747b91213, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 718894767112165345, guid: 48230bce5905cfb488cad83747b91213, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 48230bce5905cfb488cad83747b91213, type: 3}
+--- !u!4 &1552818743890933997 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 718894767112165345, guid: 48230bce5905cfb488cad83747b91213, type: 3}
+  m_PrefabInstance: {fileID: 2051036209332121356}
+  m_PrefabAsset: {fileID: 0}

@@ -28,17 +28,10 @@ public class AudioPlay : MonoBehaviour
 
    public void PlaySound(int a)
     {
-        if(a == 0 && !audioSource.isPlaying)
-        {
-            audioSource.PlayOneShot(clips[0], 1f);
+       
+            audioSource.PlayOneShot(clips[a], 1f);
 
-        }
-        if(a == 1)
-        {
-             audioSource.PlayOneShot(clips[1], 1f);
-
-        }
-      
+       
         
 
     }

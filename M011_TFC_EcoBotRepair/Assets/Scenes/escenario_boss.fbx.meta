@@ -3,7 +3,37 @@ guid: cfa820252b5802d43944f68436c27bb0
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.007
+    second: {fileID: 2100000, guid: 3af39af38d98d944f8692485dbd1ac82, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.009
+    second: {fileID: 2100000, guid: 2cfaa8cc6fead774d9756cb38356884d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.010
+    second: {fileID: 2100000, guid: 07401b03d0acd024cb2261e1cf1cd202, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.011
+    second: {fileID: 2100000, guid: e21abfbe33590314eb7f87a85419b4c5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Roca
+    second: {fileID: 2100000, guid: c0f22f3b6cbc0c14cb1fa9dc76e20d79, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: cano_laser
+    second: {fileID: 2100000, guid: 766d291eab57b044f96faf41081e808d, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

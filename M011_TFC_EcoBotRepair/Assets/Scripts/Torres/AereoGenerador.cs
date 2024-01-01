@@ -55,6 +55,13 @@ public class AereoGenerador : MonoBehaviour
             imageComponent[2].sprite = tilesCon[MetalReparar];
 
 
+            audioSource.clip = clips[1];
+
+            audioSource.loop = true;
+
+            audioSource.Play();
+
+
             // for (int i = 0; i < imageComponent.Length; i++)
             //  {
             //     imageComponent[i].rectTransform.sizeDelta = Vector3.zero;
@@ -90,7 +97,10 @@ public class AereoGenerador : MonoBehaviour
 
             if(!audioSource.isPlaying)
             {
+                audioSource.clip = clips[2];
+                audioSource.loop = false;
                   audioSource.Play();
+                  
 
             }
 

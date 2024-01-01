@@ -14,8 +14,11 @@ public class ColorChangeStart : MonoBehaviour
 
     private GameObject objeto;
 
+    private AudioSource audioSource;
+
     private void Start()
     {
+        audioSource = GetComponent<AudioSource>();
 
          rend = GetComponent<Renderer>();
 
@@ -46,6 +49,8 @@ public class ColorChangeStart : MonoBehaviour
                 rend.material = material;
 
                 objeto.tag = "Cargado";
+
+                audioSource.Play();
             
        
         }

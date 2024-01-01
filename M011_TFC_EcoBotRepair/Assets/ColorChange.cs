@@ -15,12 +15,18 @@ public class ColorChange : MonoBehaviour
 
     public LayerMask capasAfectadas;
 
+    private bool isColorAnimationRunning = false;
+
+    private AudioSource audioSource;
+
   
 
     private void Start()
     {
 
          rend = GetComponent<Renderer>();
+
+         audioSource = GetComponent<AudioSource>();
 
         LevelManager.TowerStateChanged += HandleTowerStateChanged;
 
@@ -50,9 +56,11 @@ public class ColorChange : MonoBehaviour
 
         if (Physics.Raycast(transform.position, localRight , out hit, distancia , capasAfectadas))
         {
-             if (hit.collider.CompareTag("Cargado"))
+             if (hit.collider.CompareTag("Cargado") && !isColorAnimationRunning)
             {
                 ColorAnimation();
+
+                print("wwww");
 
                  
                
@@ -60,6 +68,8 @@ public class ColorChange : MonoBehaviour
              if (hit.collider.CompareTag("Descargado"))
             {
                  ColorAnimationBack();
+
+                
 
                  objeto.tag = "Descargado";
                
@@ -93,6 +103,11 @@ public class ColorChange : MonoBehaviour
 
     private void ColorAnimation()
     {   
+
+        isColorAnimationRunning = true;
+
+        audioSource.Play();
+
          Material material = rend.material;
 
         //yield return new WaitForSeconds(0.5f);
@@ -102,7 +117,9 @@ public class ColorChange : MonoBehaviour
         rend.material = material;
 
         
-            StartCoroutine("ColorWait");
+        StartCoroutine("ColorWait");
+
+
 
        
 

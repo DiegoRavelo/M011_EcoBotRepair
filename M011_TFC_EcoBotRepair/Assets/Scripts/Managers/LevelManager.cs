@@ -53,16 +53,6 @@ public class LevelManager : MonoBehaviour
         cablesActivas.Add(false);
 
 
-       
-
-       
-
-
-
-         
-
-        
-
     } 
 
     public delegate void TowerStateChangedEventHandler(int tower, bool isActive);
